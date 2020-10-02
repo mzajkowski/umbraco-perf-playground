@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30517.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Readme", "_Readme", "{FB6A40E6-5254-4152-BBC6-493CF178B68E}"
+	ProjectSection(SolutionItems) = preProject
+		..\README.md = ..\README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Umbraco.TestSite.Web", "Umbraco.TestSite.Web\Umbraco.TestSite.Web.csproj", "{B250B08E-52F8-4596-A192-DE4890457BCE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B250B08E-52F8-4596-A192-DE4890457BCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B250B08E-52F8-4596-A192-DE4890457BCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B250B08E-52F8-4596-A192-DE4890457BCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B250B08E-52F8-4596-A192-DE4890457BCE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BD9963B8-043B-43BD-AD78-E6A059B41D26}
+	EndGlobalSection
+EndGlobal
