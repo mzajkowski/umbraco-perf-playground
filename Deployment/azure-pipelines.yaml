@@ -1,0 +1,114 @@
+# ASP.NET
+# Build and test ASP.NET projects.
+# Add steps that publish symbols, save build artifacts, deploy, and more:  
+# https://docs.microsoft.com/azure/devops/pipelines/apps/aspnet/build-aspnet-4
+
+trigger:
+  branches:
+    include:
+      - env-dev
+      - env-staging
+      - release/*
+  tags:
+    include:
+      - '*'
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solution: 'Source/PerfPlayground.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+  testProjectDirectory: 'Source\PerfPlayground.Tests'
+  testProject: '$(testProjectDirectory)\PerfPlayground.Tests.csproj'
+  testCoverageOutputDirectory: '$(Agent.TempDirectory)\$(Build.BuildNumber)\TestResults\Coverage'
+  testConfiguration: 'Debug'
+
+steps:
+- task: NuGetAuthenticate@0
+  inputs:
+    nuGetServiceConnections: 'MyGet'
+
+- task: NuGetToolInstaller@1
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(solution)'
+    feedsToUse: 'config'
+    nugetConfigPath: 'Deployment/NuGet.config'
+    externalFeedCredentials: 'MyGet'
+
+- powershell: |
+   $ver = $env:BUILD_SOURCEBRANCH.remove(0, 10)
+   Write-Host "##vso[task.setvariable variable=Version]$ver"
+  displayName: 'Update version to Tag'
+  condition: and(failed(), startsWith(variables['Build.SourceBranchName'], 'env-'))
+
+- task: Assembly-Info-NetFramework@2
+  inputs:
+    Path: '$(Build.SourcesDirectory)'
+    FileNames: |
+      **\AssemblyInfo.cs
+    InsertAttributes: false
+    FileEncoding: 'auto'
+    WriteBOM: false
+    Title: 'Umbraco Perf Playground'
+    Description: 'A playground with some demos and examples of (modern) performance testing done with Umbraco CMS.'
+    Company: 'Cogworks'
+    Copyright: 'Copyright © $(date:YYYY) $(date:DD.MM.YYYY DD MMMM YYYY HH:mm a) Cogworks'
+    VersionNumber: '$(Version)'
+    FileVersionNumber: '$(Version)'
+    InformationalVersion: '$(Version)'
+  condition: and(failed(), startsWith(variables['Build.SourceBranchName'], 'env-'))
+
+- task: VSBuild@1
+  inputs:
+    solution: '$(solution)'
+    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)" /p:TransformWebConfigEnabled=False /p:AutoParameterizationWebConfigConnectionStrings=False /p:MarkWebConfigAssistFilesAsExclude=False'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact'
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)'
+    ArtifactName: 'drop_upp'
+  condition: and(succeeded(), eq(variables['Build.Reason'], 'IndividualCI'))
+
+- task: MSBuild@1
+  displayName: 'Build test project'
+  inputs:
+    solution: '$(testProject)'
+    configuration: '$(testConfiguration)'
+    clean: true
+  condition: and(succeeded(), eq(variables['Build.Reason'], 'PullRequest'))
+
+- task: VSTest@2
+  displayName: 'Run tests'
+  inputs:
+    testSelector: 'testAssemblies'
+    testAssemblyVer2: |
+      $(testProjectDirectory)\bin/$(testConfiguration)\*Feedinfo.Tests*.dll
+      $(testProjectDirectory)\!**\*testadapter.dll
+      $(testProjectDirectory)\!**\obj\**
+    searchFolder: '$(System.DefaultWorkingDirectory)'
+    configuration: '$(testConfiguration)'
+    codeCoverageEnabled: false
+  condition: and(succeeded(), eq(variables['Build.Reason'], 'PullRequest'))
+
+- task: DotNetCoreCLI@2
+  displayName: 'Test Coverage'
+  inputs:
+    command: 'test'
+    projects: '$(System.DefaultWorkingDirectory)\$(testProject)'
+    arguments: '-c $(testConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(testCoverageOutputDirectory)\'
+  condition: and(succeeded(), eq(variables['Build.Reason'], 'PullRequest'))
+
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish Coverage Report'
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: '$(testCoverageOutputDirectory)\Coverage.cobertura.xml'
+    reportDirectory: '$(testCoverageOutputDirectory)'
+  condition: and(succeeded(), eq(variables['Build.Reason'], 'PullRequest'))

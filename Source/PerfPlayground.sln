@@ -10,6 +10,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Readme", "_Readme", "{FB6A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Umbraco.TestSite.Web", "Umbraco.TestSite.Web\Umbraco.TestSite.Web.csproj", "{B250B08E-52F8-4596-A192-DE4890457BCE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{029F65F1-743C-49D9-8975-1D9B710E4BE7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerfPlayground.Tests", "PerfPlayground.Tests\PerfPlayground.Tests.csproj", "{653E17D6-049F-4590-A65C-A2182E56D594}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,9 +24,16 @@ Global
 		{B250B08E-52F8-4596-A192-DE4890457BCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B250B08E-52F8-4596-A192-DE4890457BCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B250B08E-52F8-4596-A192-DE4890457BCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{653E17D6-049F-4590-A65C-A2182E56D594}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{653E17D6-049F-4590-A65C-A2182E56D594}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{653E17D6-049F-4590-A65C-A2182E56D594}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{653E17D6-049F-4590-A65C-A2182E56D594}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{653E17D6-049F-4590-A65C-A2182E56D594} = {029F65F1-743C-49D9-8975-1D9B710E4BE7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BD9963B8-043B-43BD-AD78-E6A059B41D26}
