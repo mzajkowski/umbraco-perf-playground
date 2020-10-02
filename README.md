@@ -18,7 +18,6 @@ A playground with some demos and examples of (modern) performance testing done w
 
 ## Roadmap (ideas for extensions):
 
-- Fix Lighthouse Action triggers
 - Write BenchmarkDotNet tests to show results with Results Comparer tool (https://github.com/dotnet/performance/tree/master/src/tools/ResultsComparer)
 - Attach k6 scenarios to the repository
 - Create directory for HTML raports
