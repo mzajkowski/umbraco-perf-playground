@@ -1,27 +1,3 @@
-name: Test Lighthouse Check
-on: [push]
-
-jobs:
-  lighthouse-check:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@master
-      - run: mkdir /tmp/artifacts
-      - name: Run Lighthouse
-        uses: foo-software/lighthouse-check-action@master
-        with:
-          accessToken: ${{ secrets.LIGHTHOUSE_CHECK_GITHUB_ACCESS_TOKEN }}
-          author: ${{ github.actor }}
-          branch: ${{ github.ref }}
-          outputDirectory: /tmp/artifacts
-          urls: 'http://perf-playground.dev.tcw.digital'
-          sha: ${{ github.sha }}
-      - name: Upload artifacts
-        uses: actions/upload-artifact@master
-        with:
-          name: Lighthouse reports
-          path: /tmp/artifacts
-
 name: Lighthouse Check with Minimum Score Enforcement
 on: [pull_request]
 
