@@ -89,7 +89,7 @@ steps:
   inputs:
     testSelector: 'testAssemblies'
     testAssemblyVer2: |
-      $(testProjectDirectory)\bin/$(testConfiguration)\*Feedinfo.Tests*.dll
+      $(testProjectDirectory)\bin/$(testConfiguration)\*PerfPlayground.Tests*.dll
       $(testProjectDirectory)\!**\*testadapter.dll
       $(testProjectDirectory)\!**\obj\**
     searchFolder: '$(System.DefaultWorkingDirectory)'
