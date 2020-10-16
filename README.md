@@ -2,28 +2,20 @@
 
 A playground with some demos and examples of (modern) performance testing done with Umbraco CMS.
 
-<p align="center">
-  <img src="Docs/img/perf.png" alt="Performance" />
-</p>
-
----
+![Performance Matters! #perfmatters](Docs/img/perf.png)
 
 ## General Contents:
 
+- [Github Actions](.github) workflows for automated Lighthouse and k6 performance tests
+- Basic k6 load test [scenario](Tests/k6-load-test.js)
 - Demo Umbraco Web App - backoffice credentials:
   - Username: admin@demo.com
   - Password: password123
 
----
-
 ## Roadmap (ideas for extensions):
 
-- Fix Lighthouse Action triggers
 - Write BenchmarkDotNet tests to show results with Results Comparer tool (https://github.com/dotnet/performance/tree/master/src/tools/ResultsComparer)
-- Attach k6 scenarios to the repository
 - Create directory for HTML raports
-
----
 
 ## Resources:
 
