@@ -2,11 +2,7 @@
 
 A playground with some demos and examples of (modern) performance testing done with Umbraco CMS.
 
-<p align="center">
-  <img src="Docs/img/perf.png" alt="Performance" />
-</p>
-
----
+![Performance Matters! #perfmatters](Docs/img/perf.png)
 
 ## General Contents:
 
@@ -14,15 +10,11 @@ A playground with some demos and examples of (modern) performance testing done w
   - Username: admin@demo.com
   - Password: password123
 
----
-
 ## Roadmap (ideas for extensions):
 
 - Write BenchmarkDotNet tests to show results with Results Comparer tool (https://github.com/dotnet/performance/tree/master/src/tools/ResultsComparer)
 - Attach k6 scenarios to the repository
 - Create directory for HTML raports
-
----
 
 ## Resources:
 
