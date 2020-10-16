@@ -6,6 +6,8 @@ A playground with some demos and examples of (modern) performance testing done w
 
 ## General Contents:
 
+- [Github Actions](.github) workflows for automated Lighthouse and k6 performance tests
+- Basic k6 load test [scenario](Tests/k6-load-test.js)
 - Demo Umbraco Web App - backoffice credentials:
   - Username: admin@demo.com
   - Password: password123
@@ -13,7 +15,6 @@ A playground with some demos and examples of (modern) performance testing done w
 ## Roadmap (ideas for extensions):
 
 - Write BenchmarkDotNet tests to show results with Results Comparer tool (https://github.com/dotnet/performance/tree/master/src/tools/ResultsComparer)
-- Attach k6 scenarios to the repository
 - Create directory for HTML raports
 
 ## Resources:
